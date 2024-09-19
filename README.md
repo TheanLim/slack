@@ -1,4 +1,5 @@
 # slack
+Convex DB: https://dashboard.convex.dev/t/theanlim/slack-089a8
 
 ### Auth Screen
 ```
