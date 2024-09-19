@@ -1,5 +1,7 @@
 # slack
 Convex DB: https://dashboard.convex.dev/t/theanlim/slack-089a8
+Run `npm run dev` to start the frontend
+Run `npx convex dev` to start the backend
 
 ### Auth Screen
 ```
