@@ -26,6 +26,10 @@ Run `npx convex dev` to start the backend
         <CardTitle/>
         <CardDescription/>
     </CardHeader>
+    <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6">
+        <TriangleAlert className="size-4" />
+        <p>{error}</p>
+    </div>
     <CardContent className="space-y-5 px-0 pb-0">
         <form className="space-y-2.5">
             <Input/>  // for email and pw
@@ -48,6 +52,17 @@ Run `npx convex dev` to start the backend
    - `w-full`: Sets the card width to take up the full available width of its container.
    - `h-full`: Sets the card height to take up the full available height of its container.
    - `p-8`: Adds padding (space inside the card) of 8 units (often 32px, depending on the tailwind config).
+
+2. **`div class="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6"`**:
+   - `bg-destructive/15`: Applies a background color with a 15% opacity. "destructive" is likely a custom color in the project's Tailwind configuration, and the /15 sets its transparency.
+   - `p-3`: Applies padding of 3 units on all sides, which translates to 0.75rem (12px) of padding.
+   - `rounded-md`: Adds medium rounding (md) to the corners of the element, making the corners slightly curved.
+   - `flex`: Enables flexbox on the div to layout its children (TriangleAlert and the paragraph <p>{error}</p>) in a row.
+   - `items-center`: Aligns the child elements along the center of the flex container vertically.
+   - `gap-x-2`: Sets horizontal spacing of 2 units (0.5rem or 8px) between flex children.
+   - `text-sm`: Sets the text size to small, which corresponds to 0.875rem (14px).
+   - `text-destructive`: Applies the destructive color (most likely red or a warning color) to the text.
+   - `mb-6`: Adds a margin of 6 units (1.5rem or 24px) to the bottom of the div to create spacing between the error message and the next element.
 
 2. **`CardHeader class="px-0 pt-0"`**:
    - `px-0`: No horizontal padding (space on the left and right).
