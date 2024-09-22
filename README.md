@@ -4,7 +4,7 @@ Run `npm run dev` to start the frontend
 Run `npx convex dev` to start the backend
 
 ### Auth Screen
-```
+```jsx
 <div className="h-full flex items-center justify-center bg-[#5C3B58]">
     <div className="md:h-auto md:w-[420px]">
         Auth Screen
@@ -20,7 +20,7 @@ Run `npx convex dev` to start the backend
 1. `md:w-[420px]`:On medium screens and larger (from 768px width and up), this sets the width of the div to 420 pixels.
 
 ### Sign In Card
-```
+```jsx
  <Card className="w-full h-full p-8">
     <CardHeader className="px-0 pt-0">
         <CardTitle/>
@@ -102,3 +102,11 @@ Run `npx convex dev` to start the backend
     - `text-sky-700`: Applies a sky-blue color (700 is often a darker shade).
     - `hover:underline`: Underlines the text when the user hovers over it.
     - `cursor-pointer`: Changes the mouse cursor to a pointer when hovering over the element, indicating it is clickable.
+
+### User Button
+```jsx
+<Loader className="size-4 animate-spin text-muted-foreground" />
+```
+- `size-4`: Likely sets the width and height of the loader to a size of 4 units (could refer to rem, px, or a design system unit).
+- `animate-spin`: Applies a spinning animation to the loader.
+- `text-muted-foreground`: Applies a muted or subdued color to the loader, typically from a predefined palette.
