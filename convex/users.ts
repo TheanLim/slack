@@ -6,6 +6,7 @@ export const current = query({
     args: {},
     // handler is the db controller -- it has access to the database
     handler: async (ctx) => {
+        // Convex attaches the authenticated user's ID to the request context.
         const userId = await getAuthUserId(ctx);
         if (userId == null) {
             return null;
