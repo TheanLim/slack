@@ -110,3 +110,82 @@ Run `npx convex dev` to start the backend
 - `size-4`: Likely sets the width and height of the loader to a size of 4 units (could refer to rem, px, or a design system unit).
 - `animate-spin`: Applies a spinning animation to the loader.
 - `text-muted-foreground`: Applies a muted or subdued color to the loader, typically from a predefined palette.
+
+### Toolbar
+```jsx
+export const Toolbar = () => {
+    return (
+        <nav className="bg-[#481349] flex items-center justify-between h-10 p-1.5">
+            <div className="flex-1" />
+            <div className="min-w-[280px] max-[642px] grow-[2] shrink">
+                <Button size="sm" className="bg-accent/25 hover:bg-accent-25 w-full justify-start h-7 px-2">
+                    <Search className="size-4 text-white mr-2" />
+                    <span className="text-white text-xs"/>
+                </Button>
+            </div>
+            <div className="ml-auto flex-1 flex items-center justify-end">
+                <Button variant="transparent" size="iconSm">
+                    <Info className="size-5 text-white"></Info>
+                </Button>
+            </div>
+        </nav>
+    );
+}
+```
+#### 1. **`<nav>` tag**
+   - **Class:** `bg-[#481349] flex items-center justify-between h-10 p-1.5`
+     - `bg-[#481349]`: Sets the background color to a custom hex value `#481349`.
+     - `flex`: Applies Flexbox layout, making the content inside flexibly adjust.
+     - `items-center`: Aligns all the flex items to the center vertically.
+     - `justify-between`: Spaces the items within the `nav` element evenly with space between them, but the first and last itemes are pushed to the ends of each side.
+     - `h-10`: Sets the height of the toolbar to 2.5rem (10 units on the scale).
+     - `p-1.5`: Adds padding of 0.375rem around the toolbar.
+
+#### 2. **First `div` inside the `<nav>`**
+   - **Class:** `flex-1`
+     - `flex-1`: sets the `flex-grow` property to 1, allowing the flex item to grow to fill the available space. It also sets the `flex-shrink` property to 1, allowing the item to shrink if necessary. The `flex-basis` property is set to 0, meaning the starting size of the item before it grows or shrinks will be 0.
+
+#### 3. **Second `div` inside the `<nav>`**
+   - **Class:** `min-w-[280px] max-[642px] grow-[2] shrink`
+     - `min-w-[280px]`: Sets the minimum width of this `div` to 280px.
+     - `max-[642px]`: Ensures the maximum width is 642px.
+     - `grow-[2]`: Increases the flex-grow property to 2, meaning this element will take twice as much space compared to other flex items.
+     - `shrink`: Allows the element to shrink if necessary to fit within the container.
+
+#### 4. **`Button` component inside the second `div`**
+   - **Class:** `bg-accent/25 hover:bg-accent-25 w-full justify-start h-7 px-2`
+     - `bg-accent/25`: Sets the background color with 25% opacity.
+     - `hover:bg-accent-25`: Changes the background color when hovered.
+     - `w-full`: Makes the button take up the full width of its container.
+     - `justify-start`: Aligns the content inside the button to the start (left).
+     - `h-7`: Sets the height of the button to 1.75rem.
+     - `px-2`: Adds horizontal padding of 0.5rem (left and right).
+
+#### 5. **`Search` component inside the `Button`**
+   - **Class:** `size-4 text-white mr-2`
+     - `size-4`: Custom size class that likely controls the icon size (based on utility classes in the codebase).
+     - `text-white`: Sets the text (or icon) color to white.
+     - `mr-2`: Adds a right margin of 0.5rem to space the search icon from the text.
+
+#### 6. **`span` inside the `Button`**
+   - **Class:** `text-white text-xs`
+     - `text-white`: Sets the text color to white.
+     - `text-xs`: Sets the font size to extra small (`xs`).
+
+#### 7. **Third `div` inside the `<nav>`**
+   - **Class:** `ml-auto flex-1 flex items-center justify-end`
+     - `ml-auto`: Applies automatic left margin, pushing the `div` to the far right.
+     - `flex-1`: Makes the element flexible and takes up remaining space.
+     - `flex`: Makes the `div` a flex container.
+     - `items-center`: Vertically centers items within the flex container.
+     - `justify-end`: Aligns the content of this `div` to the right.
+
+#### 8. **`Button` component inside the third `div`**
+   - **Class:** `variant="transparent" size="iconSm"`
+     - `variant="transparent"`: Applies a transparent background variant to the button.
+     - `size="iconSm"`: Likely a custom size class for the button that makes it smaller, suitable for icons.
+
+#### 9. **`Info` component inside the `Button`**
+   - **Class:** `size-5 text-white`
+     - `size-5`: Custom class for sizing the icon.
+     - `text-white`: Sets the icon color to white.
