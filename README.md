@@ -189,3 +189,217 @@ export const Toolbar = () => {
    - **Class:** `size-5 text-white`
      - `size-5`: Custom class for sizing the icon.
      - `text-white`: Sets the icon color to white.
+
+
+### WorkspaceId Layout
+```jsx
+ <div className="flex h-[calc(100vh-40px)]">
+    <Sidebar />
+    {children}
+</div>
+```
+#### 1. **Flex Container with Height Calculation**
+   - **Class:** `flex h-[calc(100vh-40px)]`
+     - `flex`: Applies a flexbox layout to the container, allowing its children (the `Sidebar` and `{children}` components) to be aligned and spaced using flex properties.
+     - `h-[calc(100vh-40px)]`: Sets the height of the container to the full viewport height (`100vh`) minus `40px`. This is useful for creating a layout where the container takes up the entire height of the viewport while leaving space for any fixed elements, like a header.
+
+### Sidebar
+```jsx
+<div className="w-[70px] h-full bg-[#481349] flex flex-col gap-y-4 items-center pt-[9px] pb-4">
+    <WorkspaceSwitcher />
+    <SidebarButton icon={Home} label="Home" isActive={pathname.includes("/workspace")} />
+    <SidebarButton icon={MessagesSquare} label="DMs" />
+    <SidebarButton icon={Bell} label="Activity" />
+    <SidebarButton icon={MoreHorizontal} label="More" />
+    <div className="flex flexcol items-center justify-center gap-y-1 mt-auto">
+        <UserButton />
+    </div>
+</div>
+
+```
+#### 1. **Sidebar Component**
+   - **Outer `div`:**
+     - **Class:** `w-[70px] h-full bg-[#481349] flex flex-col gap-y-4 items-center pt-[9px] pb-4`
+       - `w-[70px]`: Sets the width of the sidebar to `70px`.
+       - `h-full`: Makes the sidebar take up the full height of its parent container.
+       - `bg-[#481349]`: Applies a dark purple background color.
+       - `flex`: Utilizes a flexbox layout.
+       - `flex-col`: Arranges child elements in a column.
+       - `gap-y-4`: Adds vertical spacing of `1rem` (16px) between child elements.
+       - `items-center`: Centers child elements horizontally within the sidebar.
+       - `pt-[9px]`: Applies a top padding of `9px`.
+       - `pb-4`: Applies a bottom padding of `1rem` (16px).
+
+   - **Child Components:**
+     - **`WorkspaceSwitcher`:** A component likely used to switch between different workspaces.
+     
+     - **`SidebarButton` Components:**
+       - Each `SidebarButton` receives an `icon`, `label`, and `isActive` prop.
+       - **Classes for Buttons:**
+         - Uses Tailwind CSS classes for consistent styling (not detailed in this snippet).
+
+   - **User Button Section:**
+     - **Outer `div`:**
+       - **Class:** `flex flex-col items-center justify-center gap-y-1 mt-auto`
+         - `flex`: Utilizes flexbox for layout.
+         - `flex-col`: Arranges items in a column.
+         - `items-center`: Centers items horizontally.
+         - `justify-center`: Centers items vertically.
+         - `gap-y-1`: Adds vertical spacing of `0.25rem` (4px) between items.
+         - `mt-auto`: Applies automatic top margin, pushing this section to the bottom of the sidebar.
+
+     - **`UserButton`:** A component that likely represents user-related functionality, such as profile settings or sign out.
+
+
+
+### Sidebar Button
+```jsx
+export const SidebarButton = ({ icon: Icon, label, isActive }: SidebarButtonProps) => {
+    return (
+        <div className="flex flex-col items-center justify-center gap-y-0.5 cursor-pointer group">
+            <Button
+                variant="transparent"
+                // cn conditionally renders tailwind classes without conflict
+                className={cn(
+                    "size-9 p-2 group-hover:bg-accent/20",
+                    isActive && "bg-accent/20"
+                )}
+            >
+                <Icon className="size-5 text-white group-hover:scale-110 transition-all" />
+            </Button>
+            <span className="text-[11px] text-white group-hover:text-accent">
+                {label}
+            </span>
+        </div>
+    )
+}
+```
+#### 1. **`SidebarButton` Component**
+   - **Structure:**
+     - **Outer `div`:** 
+       - **Class:** `flex flex-col items-center justify-center gap-y-0.5 cursor-pointer group`
+         - `flex`: Applies flexbox layout.
+         - `flex-col`: Arranges children in a column.
+         - `items-center`: Centers children horizontally.
+         - `justify-center`: Centers children vertically.
+         - `gap-y-0.5`: Adds a vertical gap between children.
+         - `cursor-pointer`: Changes the cursor to a pointer on hover.
+         - `group`: Enables group hover states for nested elements.
+
+     - **`Button`:**
+       - **Variant:** `transparent`
+       - **Class:** `cn("size-9 p-2 group-hover:bg-accent/20", isActive && "bg-accent/20")`
+         - `size-9`: Custom class for button sizing.
+         - `p-2`: Applies padding of `0.5rem`.
+         - `group-hover:bg-accent/20`: Changes the background color on hover.
+         - `isActive && "bg-accent/20"`: Conditionally applies background color if active.
+
+     - **Icon Component:**
+       - **Class:** `size-5 text-white group-hover:scale-110 transition-all`
+         - `size-5`: Custom class for icon sizing.
+         - `text-white`: Sets the icon color to white.
+         - `group-hover:scale-110`: Scales the icon up slightly on hover.
+         - `transition-all`: Enables smooth transitions for all properties.
+
+     - **`span`:**
+       - **Class:** `text-[11px] text-white group-hover:text-accent`
+         - `text-[11px]`: Sets the font size to `11px`.
+         - `text-white`: Sets the text color to white.
+         - `group-hover:text-accent`: Changes the text color on hover.
+
+### Workspace Switcher
+```jsx
+<DropdownMenu>
+    <DropdownMenuTrigger>
+        <Button className="size-9 relative overflow-hidden bg-[#ABABAD] hover:bg-[#ABABAD]/80 text-slate-800 font-semibold text-xl">
+            {workspaceLoading ? (
+                <Loader className="size-5 animate-spin shrink-0" />
+            ) : (
+                workspace?.name.charAt(0).toUpperCase()
+            )}
+        </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent side="bottom" align="start" className="w-64">
+        <DropdownMenuItem
+            className="cursor-pointer flex-col justtify-start items-start capitalize"
+        >
+            {workspace?.name}
+            <span className="text-sx text-muted-foreground">
+                Active workspace
+            </span>
+        </DropdownMenuItem>
+        {filteredWorkspaces?.map((workspace) => (
+            <DropdownMenuItem
+                key={(workspace._id)}
+                className="cursor-pointer capitalize overflow-hidden"
+            >
+                <div className="shrink-0 size-9 relative overflow-hidden bg-[#616061] text-white font-semibold text-lg rounded-md flex items-center justify-center mr-2">
+                    {workspace.name.charAt(0).toUpperCase()}
+                </div>
+                <p className="truncate">{workspace.name}</p>
+            </DropdownMenuItem>
+        ))}
+        <DropdownMenuItem
+            className="cursor-pointer"
+            onClick={() => { setOpen(true) }}
+        >
+            <div className="size-9 relative overflow-hidden bg-[#F2F2F2] text-slate-800 font-semibold text-lg rounded-md flex items-center justify-center mr-2">
+                <Plus />
+            </div>
+            Create a new workspace
+        </DropdownMenuItem>
+    </DropdownMenuContent>
+</DropdownMenu>
+```
+#### 1. **`WorkspaceSwitcher` Component**
+   - **Structure:**
+     - **`DropdownMenuTrigger`:**
+       - **`Button`:**
+         - **Class:** `size-9 relative overflow-hidden bg-[#ABABAD] hover:bg-[#ABABAD]/80 text-slate-800 font-semibold text-xl`
+           - `size-9`: Custom class for button sizing.
+           - `relative`: Sets the positioning context for absolutely positioned children.
+           - `overflow-hidden`: Hides any overflow content.
+           - `bg-[#ABABAD]`: Sets the background color to a grayish tone.
+           - `hover:bg-[#ABABAD]/80`: Changes the background color to a slightly transparent version on hover.
+           - `text-slate-800`: Sets the text color to a slate shade.
+           - `font-semibold`: Applies a semi-bold font weight.
+           - `text-xl`: Sets the font size to extra-large.
+
+         - **Conditional Content:**
+           - Displays a `Loader` icon if `workspaceLoading` is true; otherwise, it shows the first character of `workspace.name`, capitalized.
+
+     - **`DropdownMenuContent`:**
+       - **Props:** `side="bottom" align="start"`
+         - Positions the dropdown content below the trigger and aligns it to the start (left).
+       - **Class:** `w-64`
+         - Sets the width of the dropdown to `16rem`.
+
+     - **Dropdown Menu Items:**
+       - **First Item (`DropdownMenuItem`):**
+         - **Class:** `cursor-pointer flex-col justify-start items-start capitalize`
+           - `cursor-pointer`: Changes the cursor to a pointer on hover.
+           - `flex-col`: Arranges children in a column.
+           - `justify-start`: Aligns children to the start of the column.
+           - `items-start`: Aligns children to the start of the row.
+           - `capitalize`: Capitalizes the text.
+         - Displays `workspace.name` and a span with the text "Active workspace" styled with `text-sx text-muted-foreground`.
+
+       - **Mapped Workspace Items:**
+         - **`DropdownMenuItem`:**
+           - **Key:** `workspace._id`
+           - **Class:** `cursor-pointer capitalize overflow-hidden`
+             - Similar cursor and capitalization as the first item.
+           - **Content:**
+             - **Icon Container:**
+               - **Class:** `shrink-0 size-9 relative overflow-hidden bg-[#616061] text-white font-semibold text-lg rounded-md flex items-center justify-center mr-2`
+                 - Sets dimensions, background color, text color, font size, and flex properties for the icon displaying the first character of the workspace name.
+             - **Workspace Name:** Displays the full name of the workspace, truncated if too long.
+
+       - **Last Item (`Create a New Workspace`):**
+         - **Class:** `cursor-pointer`
+           - Sets the cursor to a pointer.
+         - **OnClick:** Triggers `setOpen(true)` when clicked.
+         - **Icon Container:**
+           - **Class:** `size-9 relative overflow-hidden bg-[#F2F2F2] text-slate-800 font-semibold text-lg rounded-md flex items-center justify-center mr-2`
+             - Similar styling as the previous items but with a different background color (light gray).
+           - Displays a `Plus` icon for creating a new workspace.
