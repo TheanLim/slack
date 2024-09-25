@@ -8,7 +8,18 @@ const schema = defineSchema({
     name: v.string(),
     userId: v.id("users"),
     joinCode: v.string(),
+  }),
+  // Associate users to workspaces, and their role in the workspaces
+  members: defineTable({
+    userId: v.id("users"),
+    workspaceId: v.id("workspaces"),
+    // Only two types of roles
+    role: v.union(v.literal("admin"), v.literal("member"))
   })
+    // Indexing for faster queries
+    .index("by_user_id", ["userId"])
+    .index("by_workspace_id", ["workspaceId"])
+    .index("by_workspace_id_user_id", ["workspaceId", "userId"]),
   // Your other tables...
 });
 
