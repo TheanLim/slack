@@ -1,4 +1,5 @@
 import { ConvexClientProvider } from "@/components/convex-client-provider";
+import { JotaiProvider } from "@/components/jotai-provider";
 import { Modals } from "@/components/modals";
 import { Toaster } from "@/components/ui/sonner";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
@@ -33,10 +34,12 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <ConvexClientProvider>
-            {/* Need Toaster at this level for Global Availability, Centralized Positioningm and act as Event Listeners */}
-            <Toaster />
-            <Modals />
-            {children}
+            <JotaiProvider>
+              {/* Need Toaster at this level for Global Availability, Centralized Positioningm and act as Event Listeners */}
+              <Toaster />
+              <Modals />
+              {children}
+            </JotaiProvider>
           </ConvexClientProvider>
         </body>
       </html>
