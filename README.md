@@ -532,3 +532,26 @@ export const SidebarButton = ({ icon: Icon, label, isActive }: SidebarButtonProp
 
      - **`<ListFilter class="size-4">`:**
        - **`Size:`** Icon with a size of `16px` (`size-4`).
+
+### Workspace Sidebar
+```jsx
+<div className="flex flex-col bg-[#5E2C5F] h-full items-center justify-center">
+    <Loader className="size-5 animate-spin text-white" />
+</div>
+```
+#### 1. **`Container`**
+   - **Structure:**
+     - **`<div class="flex flex-col bg-[#5E2C5F] h-full items-center justify-center">`:**
+       - **`Display:`** Flexbox layout, with items stacked vertically (`flex-col`).
+       - **`Background:`** A solid background color of `#5E2C5F` (`bg-[#5E2C5F]`).
+       - **`Height:`** The container takes the full height of its parent (`h-full`).
+       - **`Alignment:`**
+         - **Horizontal:** Items are centered horizontally (`items-center`).
+         - **Vertical:** Items are centered vertically within the container (`justify-center`).
+
+#### 2. **`Loader`**
+   - **Structure:**
+     - **`<Loader class="size-5 animate-spin text-white">`:**
+       - **`Size:`** A size of `20px` (`size-5`).
+       - **`Animation:`** The loader spins continuously (`animate-spin`).
+       - **`Color:`** The loader is white (`text-white`).
