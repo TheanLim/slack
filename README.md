@@ -403,3 +403,132 @@ export const SidebarButton = ({ icon: Icon, label, isActive }: SidebarButtonProp
            - **Class:** `size-9 relative overflow-hidden bg-[#F2F2F2] text-slate-800 font-semibold text-lg rounded-md flex items-center justify-center mr-2`
              - Similar styling as the previous items but with a different background color (light gray).
            - Displays a `Plus` icon for creating a new workspace.
+
+### Workspace Header
+```jsx
+<div className="flex items-center justify-between px-4 h-[49px] gap-0.5">
+    <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+            <Button
+                variant="transparent"
+                className="font-semibold text-lg w-auto p-1.5 overflow-hidden"
+                size="sm"
+            >
+                <span className="truncate">{workspace.name}</span>
+                <ChevronDown className="size-4 ml-1 shrink-0" />
+            </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent side="bottom" align="start" className="w-64">
+            <DropdownMenuItem
+                className="cursor-pointer capitalize"
+            >
+                <div className="size-9 relative overflow-hidden bg-[#616061] text-white font-semibold text-xl rounded-md flex items-center justify-center mr-2">
+                    {workspace.name.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex flex-col items-start">
+                    <p className="font-bold">{workspace.name}</p>
+                    <p className="text-sx text-muted-foreground">Active workspace</p>
+                </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+                className="cursor-pointer py-2"
+                onClick={() => { }}
+            >
+                Preferences
+            </DropdownMenuItem>
+        </DropdownMenuContent>
+    </DropdownMenu>
+    <div className="flex items-center gap-0.5">
+        <Hint label="Filter conversations" side="bottom">
+            <Button variant="transparent" size="iconSm">
+                <ListFilter className="size-4" />
+            </Button>
+        </Hint>
+    </div>
+</div>
+```
+#### 1. **`Container`**
+   - **Structure:**
+     - **`<div class="flex items-center justify-between px-4 h-[49px] gap-0.5">`:**
+       - **`Display:`** Flexbox is used to align child elements in a horizontal row (`flex`).
+       - **`Alignment:`** The items are vertically centered (`items-center`) and spaced horizontally to occupy the available space (`justify-between`).
+       - **`Padding:`** Horizontal padding of `16px` (`px-4`).
+       - **`Height:`** A fixed height of `49px` (`h-[49px]`).
+       - **`Gap:`** Small gap between flex items (`gap-0.5`, `2px`).
+
+#### 2. **`DropdownMenu`**
+   - **Structure:**
+     - **`<DropdownMenu>`**
+       - Component for handling dropdown behavior.
+
+#### 3. **`Button`**
+   - **Structure:**
+     - **`<Button variant="transparent" class="font-semibold text-lg w-auto p-1.5 overflow-hidden" size="sm">`:**
+       - **`Variant:`** Transparent background (`variant="transparent"`).
+       - **`Font Style:`** Bold font (`font-semibold`) with a size of `large` (`text-lg`).
+       - **`Width:`** Automatic width based on content (`w-auto`).
+       - **`Padding:`** Padding of `6px` (`p-1.5`).
+       - **`Overflow:`** Hidden overflow to avoid content spill (`overflow-hidden`).
+
+   - **`<span class="truncate">`:**
+       - **`Text Overflow:`** Text inside the span is truncated with an ellipsis (`truncate`) if it overflows.
+   
+   - **`<ChevronDown class="size-4 ml-1 shrink-0">`:**
+       - **`Size:`** A size of `16px` (`size-4`).
+       - **`Margin Left:`** A small left margin of `4px` (`ml-1`).
+       - **`Shrink:`** Prevents the icon from shrinking (`shrink-0`).
+
+#### 4. **`DropdownMenuContent`**
+   - **Structure:**
+     - **`<DropdownMenuContent side="bottom" align="start" class="w-64">`:**
+       - **`Positioning:`** Dropdown is aligned to the start and opens at the bottom (`side="bottom"`, `align="start"`).
+       - **`Width:`** A fixed width of `256px` (`w-64`).
+
+#### 5. **`DropdownMenuItem`**
+   - **Structure:**
+     - **`<DropdownMenuItem class="cursor-pointer capitalize">`:**
+       - **`Cursor:`** Pointer cursor to indicate an interactive item (`cursor-pointer`).
+       - **`Text Transform:`** Text is capitalized (`capitalize`).
+
+     - **`<div class="size-9 relative overflow-hidden bg-[#616061] text-white font-semibold text-xl rounded-md flex items-center justify-center mr-2">`:**
+       - **`Size:`** A fixed size of `36px` (`size-9`).
+       - **`Background:`** A custom background color (`bg-[#616061]`).
+       - **`Text Style:`** White text with bold font and size of `extra-large` (`text-white`, `font-semibold`, `text-xl`).
+       - **`Layout:`** Flexbox layout centered vertically and horizontally (`flex`, `items-center`, `justify-center`).
+       - **`Border Radius:`** A rounded appearance (`rounded-md`).
+       - **`Margin Right:`** Margin of `8px` to the right (`mr-2`).
+
+     - **`<div class="flex flex-col items-start">`:**
+       - **`Layout:`** Flexbox layout with items stacked vertically (`flex-col`) and aligned to the start (`items-start`).
+   
+       - **`<p class="font-bold">`:**
+         - **`Font Style:`** Bold font (`font-bold`).
+
+       - **`<p class="text-sx text-muted-foreground">`:**
+         - **`Font Size:`** Small text (`text-sx`).
+         - **`Text Color:`** Muted foreground color (`text-muted-foreground`).
+
+#### 6. **`Preferences DropdownMenuItem`**
+   - **Structure:**
+     - **`<DropdownMenuItem class="cursor-pointer py-2">`:**
+       - **`Cursor:`** Pointer cursor for interactivity (`cursor-pointer`).
+       - **`Padding:`** Vertical padding of `8px` (`py-2`).
+
+#### 7. **`Right Section`**
+   - **Structure:**
+     - **`<div class="flex items-center gap-0.5">`:**
+       - **`Display:`** Flexbox layout to align items in a row (`flex`).
+       - **`Alignment:`** Items are centered vertically (`items-center`).
+       - **`Gap:`** A small gap of `2px` between items (`gap-0.5`).
+
+#### 8. **`Hint with Filter Button`**
+   - **Structure:**
+     - **`<Hint label="Filter conversations" side="bottom">`:**
+       - Provides a tooltip-like hint that appears at the bottom (`side="bottom"`).
+
+     - **`<Button variant="transparent" size="iconSm">`:**
+       - **`Variant:`** Transparent button background (`variant="transparent"`).
+       - **`Size:`** Small icon button (`size="iconSm"`).
+
+     - **`<ListFilter class="size-4">`:**
+       - **`Size:`** Icon with a size of `16px` (`size-4`).
