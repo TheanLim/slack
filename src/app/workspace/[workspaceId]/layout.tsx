@@ -12,9 +12,11 @@ interface WorkspaceIdLayoutProps {
 const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
     return (
         <div className="h-full">
+            {/* Toolbar is placed top;has a searc hbar and an info icon */}
             <Toolbar />
             {/* Toolbar above has h-10 ==> 40px so we offset it */}
             <div className="flex h-[calc(100vh-40px)]">
+                {/* Sidebar is placed left; has Home/DMs/Activity/UserButtons and others */}
                 <Sidebar />
                 <ResizablePanelGroup
                     direction="horizontal"
@@ -25,6 +27,7 @@ const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
                         minSize={11}
                         className="bg-[#5E2C5F]"
                     >
+                        {/* WorkspaceSidebar is between sidebar and workspace; most notably listing out all workspaces */}
                         <WorkspaceSidebar />
                     </ResizablePanel>
                     <ResizableHandle withHandle />
