@@ -555,3 +555,13 @@ export const SidebarButton = ({ icon: Icon, label, isActive }: SidebarButtonProp
        - **`Size:`** A size of `20px` (`size-5`).
        - **`Animation:`** The loader spins continuously (`animate-spin`).
        - **`Color:`** The loader is white (`text-white`).
+
+### Invite Modal
+```jsx
+<p className="text-4xl font-bold tracking-widest uppercase">
+  {joinCode}
+</p>
+```
+#### tracking-widest
+- Purpose:
+  - Increases the space between the letters of text, making the text appear more spread out. This is typically used to improve readability or create a specific design effect.
