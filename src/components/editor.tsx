@@ -6,6 +6,7 @@ import "quill/dist/quill.snow.css";
 import { MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { MdSend } from "react-icons/md";
 import { PiTextAa } from "react-icons/pi";
+import { EmojiPopover } from "./emoji-popover";
 import { Hint } from "./hint";
 import { Button } from "./ui/button";
 
@@ -133,8 +134,13 @@ const Editor = ({
         if (toolbarElement) {
             toolbarElement.classList.toggle("hidden");
         }
-
     }
+
+    const onEmojiSelect = (emoji: any) => {
+        const quill = quillRef.current;
+        quill?.insertText(quill?.getSelection()?.index || 0, emoji.native);
+    }
+
     // Remove empty tags such as '\n', <br />,... when counting if isEmpty
     const isEmpty = text.replace(/<(.|\n)*?>/g, "").trim().length === 0;
 
@@ -154,16 +160,15 @@ const Editor = ({
                         </Button>
                     </Hint>
 
-                    <Hint label="Emoji">
+                    <EmojiPopover onEmojiSelect={onEmojiSelect}>
                         <Button
                             disabled={disabled}
                             size="iconSm"
                             variant="ghost"
-                            onClick={() => { }}
                         >
                             <Smile className="size-4" />
                         </Button>
-                    </Hint>
+                    </EmojiPopover>
 
                     {variant === "create" &&
                         <Hint label="Image">
