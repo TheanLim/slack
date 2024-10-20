@@ -10,6 +10,7 @@ import { Header } from "./header";
 
 const ChannelIdPage = () => {
     const channelId = useChannelId();
+    // Load the latest BATCH_SIZE results (in reverse -- latest message is on the top)
     const { results, status, loadMore } = useGetMessages({ channelId })
     const { data: channel, isLoading: channelLoading } = useGetChannel({ id: channelId });
 

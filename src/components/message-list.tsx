@@ -44,6 +44,7 @@ export const MessageList = ({
     const workspaceId = useWorkspaceId();
     const { data: currentMember } = useCurrentMember({ workspaceId });
 
+    // data is the latest BATCH_SIZE messages (in reverse -- latest message is on the top)
     // groupMessages is an array of {datekey:[messageArray]}
     const groupMessages = data?.reduce(
         // ReducerFn(accumulatedValue, arrayItem)
@@ -63,6 +64,8 @@ export const MessageList = ({
         {} as Record<string, typeof data>
     )
     return (
+        // Need flex-col-reverse to reverse the reversed data order, 
+        // because data[0] is the latest message, and we want to display at the bottom
         <div className="flex-1 flex flex-col-reverse pb-4 overflow-y-auto messages-scrollbar">
             {/* Object.entries convert an array into a list of [key, value] pairs */}
             {Object.entries(groupMessages || {}).map(([dateKey, messages]) => (
