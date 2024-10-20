@@ -48,8 +48,8 @@ export const UserItem = ({
         >
             <Link href={`/worksapace/${workspaceId}/member/${id}`}>
                 <Avatar className="size-5 rounded-md mr-1">
-                    <AvatarImage className="rounded-md" src={image} />
-                    <AvatarFallback className="rounded-md bg-sky-500 text-white text-xs">
+                    <AvatarImage src={image} />
+                    <AvatarFallback>
                         {avatarFallback}
                     </AvatarFallback>
                 </Avatar>
