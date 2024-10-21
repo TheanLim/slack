@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { Doc, Id } from "../../convex/_generated/dataModel";
 import { Hint } from "./hint";
 import { Thumbnail } from "./thumbnail";
+import { Toolbar } from "./toolbar";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 // Doing this because Quill doesn't support server side rendering (SSR).
@@ -111,6 +112,16 @@ export const Message = ({
                     ) : null}
                 </div>
             </div>
+            {!isEditing && (
+                <Toolbar
+                    isAuthor={isAuthor}
+                    isPending={false}
+                    handleEdit={() => setEditingId(id)}
+                    handleThread={() => { }}
+                    handleDelete={() => { }}
+                    hideThreadButton={hideThreadButton}
+                />
+            )}
         </div>
     )
 };
