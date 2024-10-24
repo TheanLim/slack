@@ -112,6 +112,8 @@ const Editor = ({
         }
 
         quill.setContents(defaultValueRef.current);
+        const contentLength = quill.getLength();
+        quill.setSelection(contentLength - 1, 0);
         setText(quill.getText());
 
         quill.on(Quill.events.TEXT_CHANGE, () => {
