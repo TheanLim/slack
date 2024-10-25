@@ -6,6 +6,7 @@ interface UseCurrentMemberProps {
     workspaceId: Id<"workspaces">;
 }
 
+// Get the user's memberId of the current workspace
 export const useCurrentMember = ({ workspaceId }: UseCurrentMemberProps) => {
     const data = useQuery(api.members.current, { workspaceId });
     const isLoading = data === undefined;

@@ -47,6 +47,7 @@ export const get = query({
     },
 })
 
+// Get the user's memberId of the current workspace
 export const current = query({
     args: { workspaceId: v.id("workspaces") },
     handler: async (ctx, args) => {

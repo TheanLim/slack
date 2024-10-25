@@ -40,6 +40,7 @@ const schema = defineSchema({
     // if a message has a parent message,the it's part of a thread
     parentMessageId: v.optional(v.id("messages")),
     conversationId: v.optional(v.id("conversations")),
+    // When a messages is edited
     updatedAt: v.optional(v.number()),
   })
     .index("by_workspace_id", ["workspaceId"])
