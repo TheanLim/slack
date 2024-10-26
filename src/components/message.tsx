@@ -2,6 +2,7 @@ import { useRemoveMessage } from "@/features/messages/api/use-remove-message";
 import { useUpdateMessage } from "@/features/messages/api/use-update-message";
 import { useToggleReactions } from "@/features/reactions/api/use-toggle-reactions";
 import { useConfirm } from "@/hooks/use-confirm";
+import { usePanel } from "@/hooks/use-panel";
 import { cn } from "@/lib/utils";
 import { format, isToday, isYesterday } from "date-fns";
 import dynamic from "next/dynamic";
@@ -67,6 +68,7 @@ export const Message = ({
     threadImage,
     threadTimestamp,
 }: MessageProps) => {
+    const { parentMessageId, onOpenMessage, onClose } = usePanel();
     const [ConfirmDialog, confirm] = useConfirm(
         "Delete message",
         "Are you sure you want to delete this message? This cannot be undone."
@@ -101,7 +103,9 @@ export const Message = ({
             {
                 onSuccess: () => {
                     toast.success("Message deleted");
-                    // TODO: close thread if openeded
+                    if (parentMessageId === id) {
+                        onClose();
+                    }
                 },
                 onError: () => {
                     toast.error("Failed to delete message.");
@@ -162,8 +166,8 @@ export const Message = ({
                         <Toolbar
                             isAuthor={isAuthor}
                             isPending={isPending}
-                            handleEdit={() => setEditingId(id)}
-                            handleThread={() => { }}
+                            handleEdit={() => setEditingId(id)} // triggered when clicking on the edit button
+                            handleThread={() => onOpenMessage(id)}
                             handleDelete={handleRemove}
                             handleReaction={handleReaction}
                             hideThreadButton={hideThreadButton}
@@ -236,7 +240,7 @@ export const Message = ({
                         // id is the same as message_.id; setEditingId(id) will cause isEditing to be true 
                         // because in message-list, it's set to be editingId==message_id
                         handleEdit={() => setEditingId(id)}
-                        handleThread={() => { }}
+                        handleThread={() => onOpenMessage(id)}
                         handleDelete={handleRemove}
                         handleReaction={handleReaction}
                         hideThreadButton={hideThreadButton}

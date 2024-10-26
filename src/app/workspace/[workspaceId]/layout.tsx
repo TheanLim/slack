@@ -1,6 +1,10 @@
 "use client";
 
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
+import { Thread } from "@/features/messages/components/threads";
+import { usePanel } from "@/hooks/use-panel";
+import { Loader } from "lucide-react";
+import { Id } from "../../../../convex/_generated/dataModel";
 import { Sidebar } from "./sidebar";
 import { Toolbar } from "./toolbar";
 import { WorkspaceSidebar } from "./workspace-sidebar";
@@ -10,9 +14,12 @@ interface WorkspaceIdLayoutProps {
 }
 
 const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
+    const { parentMessageId, onClose } = usePanel();
+    const showPanel = !!parentMessageId;
+
     return (
         <div className="h-full">
-            {/* Toolbar is placed top;has a searc hbar and an info icon */}
+            {/* Toolbar is placed top;has a search bar and an info icon */}
             <Toolbar />
             {/* Toolbar above has h-10 ==> 40px so we offset it */}
             <div className="flex h-[calc(100vh-40px)]">
@@ -34,6 +41,24 @@ const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
                     <ResizablePanel minSize={20}>
                         {children}
                     </ResizablePanel>
+                    {showPanel && (
+                        <>
+                            <ResizableHandle withHandle />
+                            <ResizablePanel minSize={20} defaultSize={29}>
+                                {parentMessageId ? (
+                                    <Thread
+                                        messageId={parentMessageId as Id<"messages">}
+                                        onClose={onClose}
+                                    />
+
+                                ) : (
+                                    <div className="flex h-full items-center justify-center">
+                                        <Loader className="size-5 animate-spin text-muted-foreground" />
+                                    </div>
+                                )}
+                            </ResizablePanel>
+                        </>
+                    )}
                 </ResizablePanelGroup>
             </div>
         </div>
