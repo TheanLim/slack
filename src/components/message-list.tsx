@@ -67,6 +67,7 @@ export const MessageList = ({
     return (
         // Need flex-col-reverse to reverse the reversed data order, 
         // because data[0] is the latest message, and we want to display at the bottom
+        // we also want to load more data as we scroll up
         <div className="flex-1 flex flex-col-reverse pb-4 overflow-y-auto messages-scrollbar">
             {/* Object.entries convert an array into a list of [key, value] pairs */}
             {Object.entries(groupMessages || {}).map(([dateKey, messages]) => (
