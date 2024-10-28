@@ -47,6 +47,43 @@ export const get = query({
     },
 })
 
+export const getById = query({
+    args: { id: v.id("members") },
+    handler: async (ctx, args) => {
+        const userId = await getAuthUserId(ctx);
+        if (!userId) {
+            return null;
+        }
+
+        const member = await ctx.db.get(args.id);
+        if (!member) {
+            return null;
+        }
+
+        // Check if the current user has access 
+        // to the workspace of the member that he queries
+        const currentMember = await ctx.db
+            .query("members")
+            .withIndex("by_workspace_id_user_id", (q) =>
+                q.eq("workspaceId", member.workspaceId).eq("userId", userId)
+            )
+            .unique();
+        if (!currentMember) {
+            return null;
+        }
+
+        const user = await populateUser(ctx, member.userId);
+        if (!user) {
+            return null
+        }
+
+        return {
+            ...member,
+            user
+        }
+    },
+})
+
 // Get the user's memberId of the current workspace
 export const current = query({
     args: { workspaceId: v.id("workspaces") },
