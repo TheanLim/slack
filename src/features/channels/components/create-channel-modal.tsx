@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialogOld";
 import { Input } from "@/components/ui/input";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useRouter } from "next/navigation";

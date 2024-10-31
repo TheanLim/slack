@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialogOld";
 import { Input } from "@/components/ui/input";
 import { useRemoveWorkspace } from "@/features/workspaces/api/use-remove-workspace";
 import { useUpdateWorkspace } from "@/features/workspaces/api/use-update-workspace";

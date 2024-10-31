@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialogOld";
 
 interface ThumbnailProps {
     url: string | null | undefined;

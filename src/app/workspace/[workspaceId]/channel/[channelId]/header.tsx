@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialogOld"
 import { Input } from "@/components/ui/input"
 import { useRemoveChannel } from "@/features/channels/api/use-remove-channel"
 import { useUpdateChannel } from "@/features/channels/api/use-update-channel"
